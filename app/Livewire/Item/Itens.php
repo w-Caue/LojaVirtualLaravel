@@ -25,8 +25,7 @@ class Itens extends Component
 
     
     public function novoItem() {
-        $this->newItem = !$this->newItem ;
-        
+        $this->newItem = !$this->newItem;
     }
 
     public function save(){

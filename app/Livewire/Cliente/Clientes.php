@@ -27,13 +27,13 @@ class Clientes extends Component
     #[Rule('required', message:"Insira um nome!")]
     public $nome;
 
-    #[Rule('max:40', message:"Nome tem que conter menos de 40 caracteres!")]
-    #[Rule('min:3', message:"Nome tem que conter mais de 3 caracteres!")]
+    #[Rule('max:40', message:"Último Nome tem que conter menos de 40 caracteres!")]
+    #[Rule('min:3', message:"Último Nome tem que conter mais de 3 caracteres!")]
     #[Rule('required', message:"Insira o seu último nome!")]
     public $lastNome;
 
-    #[Rule('max:13', message:"Nome tem que conter 12 caracteres!")]
-    #[Rule('min:11', message:"Nome tem que conter 12 caracteres!")]
+    #[Rule('max:13', message:"Telefone tem que conter 12 caracteres!")]
+    #[Rule('min:11', message:"Telefone tem que conter 12 caracteres!")]
     #[Rule('required', message:"Insira um número de telefone!")]
     public $telefone = '';
 
