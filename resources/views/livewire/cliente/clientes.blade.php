@@ -89,7 +89,7 @@
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    <button wire:click="updateCliente({{$cliente->id}})"
+                                    <button wire:click="editarCliente({{ $cliente->id }})"
                                         class=" bg-transparent hover:bg-blue-500 font-semibold hover:text-white p-3 hover:border-transparent rounded m-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -108,7 +108,7 @@
     </div>
 
     @if ($editCliente)
-        <div class="fixed inset-0 h-max flex justify-center ">
+        <div class="fixed top-28 inset-0 h-max flex justify-center ">
             <div class=" border bg-white w-full max-w-3xl sm:rounded-lg">
 
                 <div class="flex justify-end bg-gray-100">
@@ -123,10 +123,98 @@
                 </div>
 
                 <div class="flex justify-center mb-4 ">
-                    <p class="text-xl">Editar Cliente</p>
+                    <p class="text-xl font-semibold">Editar Cliente</p>
                 </div>
 
-                
+                <div class="flex justify-center m-5">
+                    <form wire:submit.prevent="update()">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label for="name"
+                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    for="grid-first-name">{{ __('Nome') }}</label>
+
+                                <div>
+                                    <input wire:model="nome" id="name"
+                                        class="appearance-none block w-full bg-gray-200 text-gray-700 font-semibold border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+
+                                    @error('nome')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="w-full md:w-1/2 px-3">
+                                <label for="lastNome"
+                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    for="grid-last-name">{{ __('Último Nome') }}</label>
+
+                                <div>
+                                    <input wire:model="lastNome" id="last_name"
+                                        class="appearance-none block w-full bg-gray-200 text-gray-700 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('last_name') is-invalid @enderror"
+                                        name="last_name" value="{{ old('last_name') }}" type="text"
+                                        placeholder="">
+
+                                    @error('lastNome')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label for="telefone"
+                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ __('Telefone') }}</label>
+
+                                <div>
+                                    <input wire:model="telefone" id="telefone" type="telefone"
+                                        class="appearance-none block w-full max-w-xs bg-gray-200 text-gray-700 font-semibold border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('telefone') is-invalid @enderror"
+                                        name="telefone" value="{{ old('telefone') }}" type="text"
+                                        placeholder="">
+
+                                    @error('telefone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                            </div>
+
+                            <div class="w-full px-3">
+                                <label for="email"
+                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ __('Email') }}</label>
+
+                                <div>
+                                    <input wire:model="email" id="email" type="email"
+                                        class="appearance-none block w-full bg-gray-200 text-gray-700 font-semibold border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('email') is-invalid @enderror"
+                                        name="email" value="{{ old('email') }}" autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center m-3">
+                            <button type="submit" class="text-md font-semibold p-2 text-blue-500 rounded border border-blue-500 hover:text-white hover:bg-blue-500">
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     @endif
