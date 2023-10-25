@@ -53,6 +53,8 @@ class Clientes extends Component
         $this->telefone = $this->cliente->telefone;
         $this->email = $this->cliente->email;
 
+        $this->resetValidation();
+
     }
 
     public function update()

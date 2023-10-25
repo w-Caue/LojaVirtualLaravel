@@ -128,9 +128,14 @@
                                     {{ $item->grupo->nome }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <button
-                                        class=" bg-transparent hover:bg-blue-500 font-semibold hover:text-white p-1  hover:border-transparent rounded m-2"><i
-                                            class="bi bi-pencil-fill text-xl"></i></button>
+                                    <button wire:click.prevent="edit({{$item->id}})"
+                                        class=" bg-transparent hover:bg-blue-500 font-semibold hover:text-white p-1  hover:border-transparent rounded m-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                        </svg>
+                                    </button>
                                 </td>
 
                                 <td class="px-6 py-4">
@@ -161,22 +166,21 @@
                     </div>
 
                     <div class="flex justify-center mb-4 ">
-                        <p class="text-xl">Novo Produto</p>
+                        <p class="text-xl">{{$itemId ? 'Editar Produto' : 'Novo Produto'}}</p>
                     </div>
 
                     <div class="flex justify-center">
-                        <form wire:submit.prevent="save()" class="w-full max-w-xl">
+                        <form wire:submit.prevent="{{$itemId ? 'update()' : 'save()'}}" class="w-full max-w-xl">
                             @csrf
 
                             <div class="mb-4">
-                                <label for="nome"
-                                    class="block text-gray-700 text-sm font-bold mb-2">{{ __('Nome') }}
+                                <label class="block text-gray-700 text-sm font-bold mb-2">{{ __('Nome') }}
                                 </label>
 
                                 <div>
-                                    <input id="nome" wire:model="form.nome"
+                                    <input wire:model="nome"
                                         class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:shadow-outline"
-                                        type="text" required>
+                                        type="text">
 
                                     @error('nome')
                                         <span class="invalid-feedback" role="alert">
@@ -191,9 +195,9 @@
                                     class="block text-gray-700 text-sm font-bold mb-2">{{ __('Descrição') }}</label>
 
                                 <div>
-                                    <input id="descricao" wire:model="form.descricao"
+                                    <input id="descricao" wire:model="descricao"
                                         class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:shadow-outline"
-                                        type="text" required>
+                                        type="text">
 
                                     @error('descricao')
                                         <span class="invalid-feedback" role="alert">
@@ -209,9 +213,9 @@
                                         class="block text-gray-700 text-sm font-bold mb-2">{{ __('Preço') }}</label>
 
                                     <div>
-                                        <input id="preco" wire:model="form.preco"
+                                        <input id="preco" wire:model="preco"
                                             class="shadow appearance-none block w-32 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:shadow-outline"
-                                            type="number" required>
+                                            type="number">
 
                                         @error('preco')
                                             <span class="invalid-feedback" role="alert">
@@ -227,10 +231,11 @@
 
                                     <div>
                                         @foreach ($marcas as $marca)
-                                            <select id="marca" wire:model="form.marca"
+                                            <select id="marca" wire:model="marca"
                                                 class="shadow appearance-none block w-32 text-gray-700 font-semibold text-center border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:shadow-outline">
                                                 <option value=""></option>
-                                                <option class="font-semibold text-center" value="{{ $marca->id }}">{{ $marca->nome }}</option>
+                                                <option class="font-semibold text-center"
+                                                    value="{{ $marca->id }}">{{ $marca->nome }}</option>
 
                                             </select>
                                         @endforeach
@@ -249,10 +254,11 @@
 
                                     <div>
                                         @foreach ($grupos as $grupo)
-                                            <select id="grupo" wire:model="form.grupo"
+                                            <select id="grupo" wire:model="grupo"
                                                 class="shadow appearance-none block w-32 text-gray-700 font-semibold text-center border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:shadow-outline">
                                                 <option value=""></option>
-                                                <option class="font-semibold text-center" value="{{ $grupo->id }}">{{ $grupo->nome }}</option>
+                                                <option class="font-semibold text-center"
+                                                    value="{{ $grupo->id }}">{{ $grupo->nome }}</option>
 
                                             </select>
                                         @endforeach
@@ -270,7 +276,7 @@
                                 <div class="flex justify-center">
                                     <button type="submit"
                                         class="shadow bg-transparent hover:bg-blue-500 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">
-                                        Cadastrar
+                                        {{$itemId ? 'Salvar' : 'Cadastrar'}}
                                     </button>
                                 </div>
                             </div>

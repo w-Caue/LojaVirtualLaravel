@@ -8,18 +8,22 @@ use Livewire\Form;
 
 class ItemForm extends Form
 {
-    #[Rule('required|min:3|max:50|unique:itens')]
-    public $nome = "";
+    #[Rule('required')]
+    #[Rule('min:3')]
+    #[Rule('unique:itens')]
+    public $nome = '';
 
-    #[Rule('required|min:3|max:100')]
-    public $descricao = "";
+    #[Rule('required')]
+    #[Rule('min:3')]
+    public $descricao = '';
 
-    #[Rule('required|numeric')]
-    public $preco = "";
+    #[Rule('required')]
+    #[Rule('numeric')]
+    public $preco = '';
 
-    public $marca = "";
+    public $marca = '';
 
-    public $grupo = "";
+    public $grupo = '';
 
     public function store(){
         $this->validate();
